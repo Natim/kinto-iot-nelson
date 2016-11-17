@@ -9205,12 +9205,8 @@ var _user$project$Main$viewRange = function (model) {
 								_0: _elm_lang$html$Html_Attributes$max('180'),
 								_1: {
 									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$value('120'),
-									_1: {
-										ctor: '::',
-										_0: _elm_lang$html$Html_Events$onInput(_user$project$Main$NewPosition),
-										_1: {ctor: '[]'}
-									}
+									_0: _elm_lang$html$Html_Events$onInput(_user$project$Main$NewPosition),
+									_1: {ctor: '[]'}
 								}
 							}
 						}

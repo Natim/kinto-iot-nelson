@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Elm for the win</title>
+    </head>
+    <body>
+            <div id="elm">
+            </div>
+        <script src="elm.js"></script>
+        <script>
+          var node = document.getElementById("elm");
+          var app = Elm.Main.embed(node);
+          app.ports.b64encode.subscribe(function(str) {
+            app.ports.encoded.send(btoa(str));
+          });
+        </script>
+    </body>
+</html>

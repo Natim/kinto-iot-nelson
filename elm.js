@@ -9041,7 +9041,7 @@ var _user$project$Main$Model = F4(
 	});
 var _user$project$Main$init = {
 	ctor: '_Tuple2',
-	_0: A4(_user$project$Main$Model, 90, -1, _elm_lang$core$Maybe$Nothing, ''),
+	_0: A4(_user$project$Main$Model, 90, -1, '', ''),
 	_1: _elm_lang$core$Platform_Cmd$none
 };
 var _user$project$Main$EncodedAuth = function (a) {
@@ -9157,16 +9157,11 @@ var _user$project$Main$update = F2(
 					_elm_lang$core$Platform_Cmd_ops['!'],
 					_elm_lang$core$Native_Utils.update(
 						model,
-						{
-							password: (!_elm_lang$core$Native_Utils.eq(_p4, '')) ? _elm_lang$core$Maybe$Just(_p4) : _elm_lang$core$Maybe$Nothing
-						}),
+						{password: _p4}),
 					{
 						ctor: '::',
 						_0: _user$project$Main$b64encode(
-							A2(
-								_elm_lang$core$Basics_ops['++'],
-								'token:',
-								A2(_elm_lang$core$Maybe$withDefault, '', model.password))),
+							A2(_elm_lang$core$Basics_ops['++'], 'token:', _p4)),
 						_1: {ctor: '[]'}
 					});
 			default:
@@ -9186,7 +9181,12 @@ var _user$project$Main$NewPosition = function (a) {
 };
 var _user$project$Main$viewRange = function (model) {
 	var _p5 = model.password;
-	if (_p5.ctor === 'Just') {
+	if (_p5 === '') {
+		return A2(
+			_elm_lang$html$Html$div,
+			{ctor: '[]'},
+			{ctor: '[]'});
+	} else {
 		return A2(
 			_elm_lang$html$Html$div,
 			{ctor: '[]'},
@@ -9230,11 +9230,6 @@ var _user$project$Main$viewRange = function (model) {
 					_1: {ctor: '[]'}
 				}
 			});
-	} else {
-		return A2(
-			_elm_lang$html$Html$div,
-			{ctor: '[]'},
-			{ctor: '[]'});
 	}
 };
 var _user$project$Main$view = function (model) {

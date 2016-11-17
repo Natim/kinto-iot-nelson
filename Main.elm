@@ -13,7 +13,7 @@ import Time
 
 
 url =
-    "http://nelson.alwaysdata.net/v1/buckets/default/collections/order/records"
+    "https://nelson.alwaysdata.net/v1/buckets/default/collections/order/records"
 
 
 type Msg
@@ -27,7 +27,7 @@ type Msg
 type alias Model =
     { position : Int
     , lastSentPosition : Int
-    , password : Maybe String
+    , password : String
     , base64 : String
     }
 
@@ -38,7 +38,7 @@ type alias Model =
 
 init : ( Model, Cmd Msg )
 init =
-    ( Model 90 -1 Nothing "", Cmd.none )
+    ( Model 90 -1 "" "", Cmd.none )
 
 
 
@@ -66,14 +66,7 @@ update msg model =
             model ! []
 
         NewPassword password ->
-            { model
-                | password =
-                    if password /= "" then
-                        Just password
-                    else
-                        Nothing
-            }
-                ! [ b64encode ("token:" ++ (Maybe.withDefault "" model.password)) ]
+            { model | password = password } ! [ b64encode ("token:" ++ password) ]
 
         EncodedAuth base64 ->
             { model | base64 = base64 } ! []
@@ -131,21 +124,20 @@ view model =
 viewRange : Model -> Html.Html Msg
 viewRange model =
     case model.password of
-        Just _ ->
+        "" ->
+            Html.div [] []
+
+        _ ->
             Html.div []
                 [ Html.input
                     [ Html.Attributes.type_ "range"
                     , Html.Attributes.min "15"
                     , Html.Attributes.max "180"
-                    , Html.Attributes.value "120"
                     , Html.Events.onInput NewPosition
                     ]
                     []
                 , Html.label [] [ Html.text <| toString model.position ]
                 ]
-
-        Nothing ->
-            Html.div [] []
 
 
 main : Program Never Model Msg
